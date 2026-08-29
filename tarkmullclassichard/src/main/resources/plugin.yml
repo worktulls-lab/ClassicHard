@@ -1,0 +1,6 @@
+name: TarkMullClassicHard
+version: 1.0.0
+main: ru.dplus.hardmode.HardMode
+api-version: '1.21'
+author: dplus
+description: Усложняет игру - боссы и мобы жёстче, крипер злее, снаряжение хрупче
