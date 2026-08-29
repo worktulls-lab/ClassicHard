@@ -29,22 +29,24 @@ public class PiglinBarterListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
-    public void onBarter(PiglinBarterEvent event) {
-        double failChance = plugin.getConfig().getDouble("piglin-barter-fail-chance", 0.3);
-        if (random.nextDouble() < failChance) {
-            event.setOutcome(Collections.emptyList());
-            return;
-        }
+@EventHandler
+public void onBarter(PiglinBarterEvent event) {
+    List<ItemStack> outcome = event.getOutcome();
 
-        double amountMult = plugin.getConfig().getDouble("piglin-barter-amount-multiplier", 0.6);
-        List<ItemStack> reduced = new ArrayList<>();
-        for (ItemStack item : event.getOutcome()) {
-            ItemStack copy = item.clone();
-            int newAmount = Math.max(1, (int) Math.floor(copy.getAmount() * amountMult));
-            copy.setAmount(newAmount);
-            reduced.add(copy);
-        }
-        event.setOutcome(reduced);
+    double failChance = plugin.getConfig().getDouble("piglin-barter-fail-chance", 0.3);
+    if (random.nextDouble() < failChance) {
+        outcome.clear();
+        return;
     }
+
+    double amountMult = plugin.getConfig().getDouble("piglin-barter-amount-multiplier", 0.6);
+    List<ItemStack> reduced = new ArrayList<>();
+    for (ItemStack item : outcome) {
+        ItemStack copy = item.clone();
+        int newAmount = Math.max(1, (int) Math.floor(copy.getAmount() * amountMult));
+        copy.setAmount(newAmount);
+        reduced.add(copy);
+    }
+    outcome.clear();
+    outcome.addAll(reduced);
 }
