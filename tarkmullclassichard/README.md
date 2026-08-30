@@ -1,4 +1,4 @@
-# TarkMullClassicHard — плагин усложнения (Paper 1.21, Java 21)
+# TarkMullClassicHard — плагин усложнения (Paper 26.2 - 1.21, Java 21)
 
 ## Что делает
 
